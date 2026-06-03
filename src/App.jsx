@@ -719,7 +719,7 @@ export default function Portfolio() {
                 {' '}specializing in full-stack applications and AI-powered solutions.
               </p>
               <p className="text-gray-500 text-base leading-relaxed">
-                I build end-to-end products — from pixel-perfect React UIs to Django REST APIs, leveraging GenAI to create intelligent, impactful software. Published IEEE author with a passion for real-world problem-solving.
+                I specialize in Angular, Python, LangChain, LangGraph and MongoDB, developing systems that transform natural language into actionable insights. From conversational analytics and automated visualization pipelines to secure enterprise applications, I enjoy solving complex business problems through practical software engineering.
               </p>
             </motion.div>
 
