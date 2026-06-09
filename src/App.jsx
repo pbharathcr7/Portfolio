@@ -102,17 +102,19 @@ function ProjectCard({ project, index }) {
 
           {/* Links */}
           <div className="flex flex-wrap gap-4">
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105"
-              style={{ background: 'linear-gradient(135deg, #00D4FF, #FFB800)', color: '#000' }}
-            >
-              <ExternalLink className="w-4 h-4" />
-              Live Demo
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105"
+                style={{ background: 'linear-gradient(135deg, #00D4FF, #FFB800)', color: '#000' }}
+              >
+                <ExternalLink className="w-4 h-4" />
+                Live Demo
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            )}
             <a
               href={project.github}
               target="_blank"
@@ -353,6 +355,13 @@ export default function Portfolio() {
   const projects = [
     {
       number: '01',
+      title: 'Enterprise Policy Intelligence Assistant',
+      description: 'RAG-based assistant that answers employee handbook questions using document-aware chunking, Azure OpenAI embeddings, Pinecone similarity search, and a FastAPI + Streamlit interface.',
+      tech: ['Python', 'GenAI', 'Streamlit', 'REST APIs'],
+      github: 'https://github.com/pbharathcr7/Policy-Intelligence-Assistant',
+    },
+    {
+      number: '02',
       title: 'Investment Guidance Agent',
       description: 'AI-powered investment advisor built with LangGraph and Google Gemini. Analyzes stocks using real-time financial data, technical indicators, and news sentiment to generate personalized portfolio recommendations.',
       tech: ['Python', 'LangGraph', 'GenAI', 'Streamlit', 'yfinance', 'SerpAPI'],
@@ -360,7 +369,7 @@ export default function Portfolio() {
       live: 'https://investment-guidance-agent.streamlit.app/',
     },
     {
-      number: '02',
+      number: '03',
       title: 'Smart Recruitment',
       description: 'Full-stack AI recruitment platform with intelligent resume analysis powered by Google Gemini. Features JWT auth, role-based HR and Applicant dashboards, AI-generated job descriptions, and real-time application tracking.',
       tech: ['React', 'Django', 'REST APIs', 'GenAI', 'JWT', 'SQLite'],
@@ -368,7 +377,7 @@ export default function Portfolio() {
       live: 'https://pbharathcr7.github.io/Smart_Recruitment',
     },
     {
-      number: '03',
+      number: '04',
       title: 'E-Commerce Platform',
       description: 'Complete online retail solution with product catalog, shopping cart and order management. Angular frontend with Node.js/Express backend and MongoDB for flexible data storage.',
       tech: ['Angular', 'Node.js', 'Express', 'MongoDB'],
@@ -775,9 +784,9 @@ export default function Portfolio() {
               <h3 className="text-xs uppercase tracking-[0.3em] text-gray-600 font-medium mb-6">Tech Stack</h3>
               <div className="flex flex-col gap-5">
                 {[
-                  { category: 'Frontend', skills: ['React', 'Angular', 'TypeScript', 'Flutter', 'Tailwind CSS'], color: '#61DAFB' },
-                  { category: 'Backend', skills: ['Node.js', 'Python', 'Django', 'C#', 'REST APIs', 'LangGraph', 'GenAI'], color: '#22c55e' },
-                  { category: 'Database & Cloud', skills: ['MongoDB', 'MySQL', 'SQLite', 'Azure Functions', 'Blob Storage'], color: GOLD },
+                  { category: 'Frontend', skills: ['Angular', 'React', 'Flutter', 'JavaScript', 'TypeScript', 'Tailwind CSS'], color: '#61DAFB' },
+                  { category: 'Backend', skills: ['Node.js', 'Python', 'Django', 'FastAPI', 'REST APIs', 'LangChain', 'LangGraph', 'GenAI'], color: '#22c55e' },
+                  { category: 'Database & Cloud', skills: ['MongoDB', 'MySQL', 'Redis', 'Azure Functions', 'Blob Storage'], color: GOLD },
                 ].map(({ category, skills, color }) => (
                   <div key={category}>
                     <div className="flex items-center gap-2.5 mb-2.5">
