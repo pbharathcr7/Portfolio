@@ -2,7 +2,7 @@
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Mail, Linkedin, ArrowUpRight, Menu, X, BookOpen, Award, Trophy, ChevronDown } from 'lucide-react';
 
-// â”€â”€â”€ 3D HERO SCENE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 3D HERO SCENE
 
 const TECH_COLORS = {
   Python: '#3B82F6',
@@ -22,7 +22,7 @@ const TECH_COLORS = {
   SerpAPI: '#FFB800',
 };
 
-// â”€â”€â”€ PROJECT CARD (3D tilt) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// PROJECT CARD (3D tilt)
 
 function ProjectCard({ project, index }) {
   const x = useMotionValue(0);
@@ -137,7 +137,7 @@ function ProjectCard({ project, index }) {
   );
 }
 
-// â”€â”€â”€ CERTIFICATE FLIP CARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// CERTIFICATE FLIP CARD
 
 function CertFlipCard({ title, issuer, image, isRecognition, index }) {
   const [flipped, setFlipped] = useState(false);
@@ -251,7 +251,7 @@ function CertFlipCard({ title, issuer, image, isRecognition, index }) {
   );
 }
 
-// â”€â”€â”€ IEEE PUBLICATION CARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// IEEE PUBLICATION CARD
 
 function PublicationCard() {
   return (
@@ -313,7 +313,7 @@ function PublicationCard() {
   );
 }
 
-// â”€â”€â”€ MAIN PORTFOLIO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// MAIN PORTFOLIO
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('hero');
@@ -355,18 +355,18 @@ export default function Portfolio() {
   const projects = [
     {
       number: '01',
-      title: 'Enterprise Policy Intelligence Assistant',
-      description: 'RAG-based assistant that answers employee handbook questions using document-aware chunking, Azure OpenAI embeddings, Pinecone similarity search, and a FastAPI + Streamlit interface.',
-      tech: ['Python', 'GenAI', 'Streamlit', 'REST APIs'],
-      github: 'https://github.com/pbharathcr7/Policy-Intelligence-Assistant',
+      title: 'Investment Guidance Agent',
+      description: 'AI-powered investment advisor built with LangGraph and Google Gemini. Analyzes stocks using real-time financial data, technical indicators, and news sentiment to generate personalized portfolio recommendations.',
+      tech: ['Python', 'LangGraph', 'FastAPI', 'Streamlit', 'yfinance', 'SerpAPI'],
+      github: 'https://github.com/pbharathcr7/Investment-Guidance-Agent',
+      live: 'https://investment-guidance-agent.streamlit.app/',
     },
     {
       number: '02',
-      title: 'Investment Guidance Agent',
-      description: 'AI-powered investment advisor built with LangGraph and Google Gemini. Analyzes stocks using real-time financial data, technical indicators, and news sentiment to generate personalized portfolio recommendations.',
-      tech: ['Python', 'LangGraph', 'GenAI', 'Streamlit', 'yfinance', 'SerpAPI'],
-      github: 'https://github.com/pbharathcr7/Investment-Guidance-Agent',
-      live: 'https://investment-guidance-agent.streamlit.app/',
+      title: 'Enterprise Policy Intelligence Assistant',
+      description: 'RAG-based assistant that answers employee handbook questions using document-aware chunking, Azure OpenAI embeddings, Pinecone similarity search, and a FastAPI + Streamlit interface.',
+      tech: ['Python', 'FastAPI', 'RAG', 'Pinecone', 'REST APIs', 'Streamlit'],
+      github: 'https://github.com/pbharathcr7/Policy-Intelligence-Assistant',
     },
     {
       number: '03',
@@ -439,7 +439,7 @@ export default function Portfolio() {
         />
       </div>
 
-      {/* â”€â”€ NAVBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* NAVBAR  */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
         style={{
