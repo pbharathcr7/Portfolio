@@ -46,7 +46,7 @@ export default function IntroAnimation({ onComplete }) {
     return () => clearTimeout(skipTimer);
   }, []);
 
-  // Optimized video initialization: sets strict muted attributes and initiates playback once
+  // Optimized video initialization: sets strict muted attributes and initiates playback once buffered
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -55,7 +55,8 @@ export default function IntroAnimation({ onComplete }) {
     video.muted = true;
     video.defaultMuted = true;
 
-    if (!playTriggeredRef.current) {
+    const startPlayback = () => {
+      if (playTriggeredRef.current) return;
       playTriggeredRef.current = true;
       const playPromise = video.play();
       if (playPromise !== undefined) {
@@ -68,7 +69,22 @@ export default function IntroAnimation({ onComplete }) {
             setShowSkip(true);
           });
       }
+    };
+
+    // If video has already buffered enough data (HAVE_FUTURE_DATA or HAVE_ENOUGH_DATA)
+    if (video.readyState >= 3) {
+      startPlayback();
+    } else {
+      video.addEventListener('canplay', startPlayback, { once: true });
     }
+
+    // Safety fallback: if canplay doesn't fire within 400ms, start playback anyway
+    const fallbackTimer = setTimeout(startPlayback, 400);
+
+    return () => {
+      video.removeEventListener('canplay', startPlayback);
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   // Finish intro and notify parent
@@ -131,7 +147,6 @@ export default function IntroAnimation({ onComplete }) {
             ref={videoRef}
             src={`${import.meta.env.BASE_URL}videos/portfolio-intro.mp4`}
             preload="auto"
-            autoPlay
             muted
             playsInline
             disablePictureInPicture

@@ -59,7 +59,8 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     video.muted = true;
     video.defaultMuted = true;
 
-    if (!playTriggeredRef.current) {
+    const startPlayback = () => {
+      if (playTriggeredRef.current) return;
       playTriggeredRef.current = true;
       const playPromise = video.play();
       if (playPromise !== undefined) {
@@ -72,7 +73,21 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
             setShowSkip(true);
           });
       }
+    };
+
+    // If video has already buffered enough data
+    if (video.readyState >= 3) {
+      startPlayback();
+    } else {
+      video.addEventListener('canplay', startPlayback, { once: true });
     }
+
+    const fallbackTimer = setTimeout(startPlayback, 400);
+
+    return () => {
+      video.removeEventListener('canplay', startPlayback);
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   // Finish intro and notify parent
@@ -135,7 +150,6 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
             ref={videoRef}
             src={`${import.meta.env.BASE_URL}videos/portfolio-intro.mp4`}
             preload="auto"
-            autoPlay
             muted
             playsInline
             disablePictureInPicture
