@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Caveat:wght@600;700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -8,8 +8,10 @@
   --color-purple: #7c3aed;
 }
 
-* {
-  cursor: none;
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none;
+  }
 }
 
 html {
@@ -144,3 +146,78 @@ body {
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
+
+/* Responsive Hero Photo Positioning */
+.hero-photo-pos {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Widescreen Landscape (Desktops, Laptops, Landscape Tablets):
+   Preserve exact desktop layout with Bharath on the right half */
+@media (min-width: 768px) and (orientation: landscape) {
+  .hero-photo-pos {
+    margin-left: 50vw !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* Portrait Orientation (Phones and Portrait Tablets like iPad Pro):
+   Eliminate top void, center the title & subject, and balance spacing */
+@media (orientation: portrait) {
+  .hero-title-portrait {
+    top: 15% !important;
+    bottom: auto !important;
+    transform: none !important;
+    justify-content: center !important;
+  }
+  .hero-photo-portrait {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    top: auto !important;
+    bottom: 0 !important;
+    height: 58vh !important;
+    max-height: 850px !important;
+  }
+  .hero-accent-code-portrait {
+    top: 22% !important;
+    left: 8% !important;
+  }
+  .hero-accent-creativity-portrait {
+    top: 28% !important;
+    right: 8% !important;
+    left: auto !important;
+  }
+  .hero-cta-portrait {
+    left: 1rem !important;
+    right: 1rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transform: none;
+    bottom: 54px !important;
+  }
+  .hero-socials-desktop {
+    display: none !important;
+  }
+  .hero-socials-mobile {
+    display: flex !important;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 768px) {
+  .hero-cta-portrait {
+    left: auto !important;
+    right: 3.5rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    bottom: 9% !important;
+  }
+  .hero-socials-desktop {
+    display: flex !important;
+  }
+  .hero-socials-mobile {
+    display: none !important;
+  }
+}
+
+

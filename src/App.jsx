@@ -451,7 +451,7 @@ export default function Portfolio() {
       {!showIntro && (
         <div
           ref={cursorRef}
-          className="fixed pointer-events-none z-[9999] mix-blend-difference"
+          className="fixed pointer-events-none z-[9999] mix-blend-difference hidden md:block"
           style={{ left: '-12px', top: '-12px', width: '24px', height: '24px' }}
         >
           <div
@@ -612,7 +612,7 @@ export default function Portfolio() {
         <section
           key={showIntro ? 'hero-dormant' : 'hero-active'}
           data-section="hero"
-          className="relative h-screen flex items-center justify-center overflow-hidden"
+          className="relative min-h-[100dvh] h-[100dvh] md:h-screen flex items-center justify-center overflow-hidden"
         >
           {/* Animated CSS background — glowing orbs + grid */}
           <div className="absolute inset-0 z-0 overflow-hidden">
@@ -666,10 +666,8 @@ export default function Portfolio() {
           <div
             className="absolute z-[2] rounded-full pointer-events-none"
             style={{
-              width: '55vw',
-              height: '55vw',
-              maxWidth: '780px',
-              maxHeight: '780px',
+              width: 'clamp(320px, 55vw, 780px)',
+              height: 'clamp(320px, 55vw, 780px)',
               bottom: '-8%',
               left: '50%',
               transform: 'translateX(-50%)',
@@ -685,17 +683,15 @@ export default function Portfolio() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
               transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-x-0 flex items-center justify-between px-4 sm:px-8 md:px-14 font-black leading-none tracking-tighter select-none whitespace-nowrap pointer-events-none"
+              className="hero-title-portrait absolute inset-x-0 flex items-center justify-center md:justify-between px-4 sm:px-8 md:px-14 font-black leading-none tracking-tighter select-none whitespace-nowrap pointer-events-none top-[14%] sm:top-[18%] md:top-auto md:bottom-[60%] md:-translate-y-1/2"
               style={{
                 fontFamily: 'Orbitron, sans-serif',
-                fontSize: 'clamp(3rem, 10vw, 12rem)',
-                bottom: '60%',
-                transform: 'translateY(-50%)',
+                fontSize: 'clamp(2.3rem, 8vw, 12rem)',
                 WebkitTextStroke: `1px ${CYAN}14`,
               }}
             >
               <span>BHARATH</span>
-              <span>P</span>
+              <span className="ml-2.5 md:ml-0">P</span>
             </motion.h1>
 
             <motion.img
@@ -704,24 +700,23 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 60 }}
               animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-20 h-[64vh] sm:h-[78vh] md:h-[92vh] w-auto max-w-[92vw] object-contain object-bottom select-none pointer-events-none"
+              className="hero-photo-pos hero-photo-portrait relative z-20 h-[52vh] sm:h-[68vh] md:h-[92vh] w-auto max-w-[90vw] md:max-w-[92vw] object-contain object-bottom select-none pointer-events-none md:top-[4%]"
               style={{
-                marginLeft: '50vw',
-                top: "4%",
                 filter: `drop-shadow(0 30px 70px rgba(0,0,0,0.65)) drop-shadow(0 0 45px ${CYAN}22)`,
               }}
             />
+
             <motion.div
               initial={{ opacity: 0, y: 20, rotate: -6 }}
               animate={isLoaded ? { opacity: 1, y: 0, rotate: -3 } : { opacity: 0, y: 20, rotate: -6 }}
               transition={{ duration: 0.9, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute z-30 top-[50%] left-[6%] sm:left-[10%] pointer-events-none"
+              className="hero-accent-code-portrait absolute z-30 top-[22%] sm:top-[26%] md:top-[50%] left-[4%] sm:left-[8%] md:left-[6%] pointer-events-none"
             >
               <span
                 className="block"
                 style={{
                   fontFamily: "'Caveat', cursive",
-                  fontSize: 'clamp(2.2rem, 6vw, 5rem)',
+                  fontSize: 'clamp(1.7rem, 4.5vw, 5rem)',
                   fontWeight: 700,
                   color: CYAN,
                   textShadow: `0 0 30px ${CYAN}55`,
@@ -735,13 +730,13 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 20, rotate: -6 }}
               animate={isLoaded ? { opacity: 1, y: 0, rotate: -2 } : { opacity: 0, y: 20, rotate: -6 }}
               transition={{ duration: 0.9, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute z-30 top-[60%] left-[25%] sm:right-[8%] pointer-events-none"
+              className="hero-accent-creativity-portrait absolute z-30 top-[28%] sm:top-[32%] md:top-[60%] right-[4%] sm:right-[8%] md:right-auto md:left-[25%] pointer-events-none"
             >
               <span
                 className="block"
                 style={{
                   fontFamily: "'Caveat', cursive",
-                  fontSize: 'clamp(2.2rem, 6vw, 5rem)',
+                  fontSize: 'clamp(1.7rem, 4.5vw, 5rem)',
                   fontWeight: 700,
                   color: GOLD,
                   textShadow: `0 0 30px ${GOLD}55`,
@@ -751,12 +746,12 @@ export default function Portfolio() {
               </span>
             </motion.div>
 
-            {/* Bottom-left — social row, under the muted text */}
+            {/* Desktop social row — bottom-left */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.8, delay: 1 }}
-              className="absolute z-30 bottom-[7%] left-6 md:left-14 flex gap-3"
+              className="hero-socials-desktop absolute z-30 bottom-[7%] left-6 md:left-14 hidden md:flex gap-3"
             >
               {[
                 { icon: <Github className="w-4 h-4" />, href: 'https://github.com/pbharathcr7' },
@@ -776,25 +771,50 @@ export default function Portfolio() {
                   {s.icon}
                 </a>
               ))}
-
             </motion.div>
 
-            {/* Bottom-right — floating glass CTA panel, separate from the nav CTA */}
+            {/* Floating glass CTA panel */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.95 }}
-              className="absolute z-30 bottom-[9%] right-6 md:right-14 w-[240px] sm:w-[260px] rounded-2xl border p-5 backdrop-blur-xl"
+              className="hero-cta-portrait absolute z-30 bottom-[54px] md:bottom-[9%] left-4 right-4 mx-auto md:left-auto md:right-14 md:mx-0 w-full max-w-[340px] md:w-[260px] rounded-2xl border p-3.5 md:p-5 backdrop-blur-xl"
               style={{
                 background: 'rgba(255,255,255,0.04)',
                 borderColor: 'rgba(255,255,255,0.1)',
                 boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
               }}
             >
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: CYAN }}>
-                Currently Available
-              </p>
-              <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              {/* Card top bar */}
+              <div className="flex items-center justify-between mb-1.5 md:mb-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                  <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>
+                    Currently Available
+                  </p>
+                </div>
+                {/* Mobile/Portrait social icons embedded right in the card header */}
+                <div className="hero-socials-mobile flex md:hidden items-center gap-2">
+                  {[
+                    { icon: <Github className="w-3.5 h-3.5" />, href: 'https://github.com/pbharathcr7' },
+                    { icon: <Linkedin className="w-3.5 h-3.5" />, href: 'https://www.linkedin.com/in/bharath-p-dev/' },
+                    { icon: <Mail className="w-3.5 h-3.5" />, href: 'mailto:pbharathcr7@gmail.com' },
+                  ].map((s, i) => (
+                    <a
+                      key={i}
+                      href={s.href}
+                      target={s.href.startsWith('mailto') ? undefined : '_blank'}
+                      rel={s.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                      className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-cyan-400 transition-colors"
+                      style={{ background: 'rgba(255,255,255,0.03)' }}
+                    >
+                      {s.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[11px] md:text-xs leading-relaxed mb-3 md:mb-4 text-gray-400">
                 Open to AI Engineer opportunities and collaborations.
               </p>
 
@@ -806,7 +826,7 @@ export default function Portfolio() {
                   rel="noopener noreferrer"
                   onMouseEnter={() => setCursorVariant('hover')}
                   onMouseLeave={() => setCursorVariant('default')}
-                  className="flex items-center justify-between w-full group py-2.5 px-3.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.03] hover:bg-cyan-400/[0.08] transition-all duration-300"
+                  className="flex items-center justify-between w-full group py-2 md:py-2.5 px-3 md:px-3.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.03] hover:bg-cyan-400/[0.08] transition-all duration-300"
                 >
                   <div className="flex items-center gap-2">
                     <FileDown className="w-3.5 h-3.5 text-cyan-400 transition-transform duration-300 group-hover:translate-y-0.5" />
@@ -823,30 +843,30 @@ export default function Portfolio() {
             initial={{ opacity: 0 }}
             animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 1.3 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
+            className="absolute bottom-1.5 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 md:gap-2 cursor-pointer z-20"
             onClick={() => scrollTo('about')}
           >
-            <span className="text-xs uppercase tracking-widest" style={{ color: 'rgba(255, 255, 255, 1)' }}>Scroll</span>
+            <span className="text-[9px] md:text-xs uppercase tracking-widest text-white/60">Scroll</span>
             <motion.div
-              animate={{ y: [0, 6, 0] }}
+              animate={{ y: [0, 4, 0] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             >
-              <ChevronDown className="w-5 h-5" style={{ color: 'rgba(255, 255, 255, 1)' }} />
+              <ChevronDown className="w-3.5 h-3.5 md:w-5 md:h-5 text-white/60" />
             </motion.div>
           </motion.div>
         </section>
 
-        <section data-section="about" className="relative py-32 px-6">
+        <section data-section="about" className="relative py-16 md:py-32 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="flex items-center gap-4 mb-16"
+              className="flex items-center gap-3 md:gap-4 mb-8 md:mb-16"
             >
-              <div className="w-12 h-[2px]" style={{ background: `linear-gradient(90deg, ${CYAN}, transparent)` }} />
-              <span className="text-sm uppercase tracking-[0.3em] font-medium" style={{ color: CYAN,fontSize: 'xxx-large' }}>About Me</span>
+              <div className="w-8 md:w-12 h-[2px]" style={{ background: `linear-gradient(90deg, ${CYAN}, transparent)` }} />
+              <span className="text-base sm:text-xl md:text-[xxx-large] uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium" style={{ color: CYAN }}>About Me</span>
             </motion.div>
 
             {/* Bento grid */}
@@ -857,7 +877,7 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="lg:col-span-2 rounded-3xl p-8 lg:p-10 border border-white/10 relative overflow-hidden"
+                className="lg:col-span-2 rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/10 relative overflow-hidden"
                 style={{ background: `linear-gradient(135deg, ${CYAN}08, rgba(255,255,255,0.02))` }}
               >
                 <div
@@ -865,7 +885,7 @@ export default function Portfolio() {
                   style={{ background: CYAN, opacity: 0.06, transform: 'translate(30%, -30%)' }}
                 />
                 <h2
-                  className="text-4xl md:text-5xl font-black mb-5 leading-tight"
+                  className="text-2xl sm:text-4xl md:text-5xl font-black mb-5 leading-tight"
                   style={{ fontFamily: 'Orbitron, sans-serif' }}
                 >
                   <span style={{ background: `linear-gradient(135deg, ${CYAN}, ${GOLD})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
