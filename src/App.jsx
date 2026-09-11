@@ -53,7 +53,13 @@ function ProjectCard({ project, index }) {
       transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
     >
       <motion.div
-        style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1200 }}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: 'preserve-3d',
+          transformPerspective: 1200,
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))'
+        }}
         onMouseMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect();
           x.set((e.clientX - r.left) / r.width - 0.5);
@@ -61,7 +67,6 @@ function ProjectCard({ project, index }) {
         }}
         onMouseLeave={() => { x.set(0); y.set(0); }}
         className="relative rounded-3xl border border-white/10 overflow-hidden group"
-        style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))' }}
       >
         {/* Hover glow */}
         <div
