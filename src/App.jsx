@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Mail, Linkedin, ArrowUpRight, Menu, X, BookOpen, Award, Trophy, ChevronDown } from 'lucide-react';
 import IntroAnimation from './components/IntroAnimation';
+// Drop your cutout photo into src/assets/ and update this path/filename to match.
+import heroPhoto from './../public/assets/bharath-hero.png';
 
 // 3D HERO SCENE
 
@@ -103,19 +105,6 @@ function ProjectCard({ project, index }) {
 
           {/* Links */}
           <div className="flex flex-wrap gap-4">
-            {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105"
-                style={{ background: 'linear-gradient(135deg, #00D4FF, #FFB800)', color: '#000' }}
-              >
-                <ExternalLink className="w-4 h-4" />
-                Live Demo
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-            )}
             <a
               href={project.github}
               target="_blank"
@@ -361,35 +350,32 @@ export default function Portfolio() {
 
   const projects = [
     {
-      number: '01',
-      title: 'Investment Guidance Agent',
-      description: 'AI-powered investment advisor built with LangGraph and Google Gemini. Analyzes stocks using real-time financial data, technical indicators, and news sentiment to generate personalized portfolio recommendations.',
-      tech: ['Python', 'LangGraph', 'FastAPI', 'Streamlit', 'yfinance', 'SerpAPI'],
-      github: 'https://github.com/pbharathcr7/Investment-Guidance-Agent',
-      live: 'https://investment-guidance-agent.streamlit.app/',
+      number: "01",
+      title: "Valeria — AI Cognitive Reflection Platform",
+      description: "AI-powered cognitive journal and second brain built with Google Gemini Live. Features real-time voice conversations over WebSockets, long-term cognitive memory synthesis, PDF RAG with grounded answers, Google Calendar & Gmail integrations, collaborative life archives, and secure Firebase authentication with Firestore user isolation.",
+      tech: ["React", "Firebase", "Firestore", "Google Cloud Run", "Gemini Live API", "WebSockets", "RAG", "Google Calendar API", "Gmail API"],
+      github: "https://github.com/pbharathcr7/Valeria",
     },
     {
       number: '02',
+      title: 'Investment Guidance Agent',
+      description: 'An autonomous investment advisor built with LangGraph and Google Gemini. Analyzes stocks using real-time financial data, technical indicators, and news sentiment to generate personalized portfolio recommendations.',
+      tech: ['Python', 'LangGraph', 'FastAPI', 'Streamlit', 'yfinance', 'SerpAPI'],
+      github: 'https://github.com/pbharathcr7/Investment-Guidance-Agent',
+    },
+    {
+      number: '03',
       title: 'Enterprise Policy Intelligence Assistant',
       description: 'RAG-based assistant that answers employee handbook questions using document-aware chunking, Azure OpenAI embeddings, Pinecone similarity search, and a FastAPI + Streamlit interface.',
       tech: ['Python', 'FastAPI', 'RAG', 'Pinecone', 'REST APIs', 'Streamlit'],
       github: 'https://github.com/pbharathcr7/Policy-Intelligence-Assistant',
     },
     {
-      number: '03',
+      number: '04',
       title: 'Smart Recruitment',
       description: 'Full-stack AI recruitment platform with intelligent resume analysis powered by Google Gemini. Features JWT auth, role-based HR and Applicant dashboards, AI-generated job descriptions, and real-time application tracking.',
       tech: ['React', 'Django', 'REST APIs', 'GenAI', 'JWT', 'SQLite'],
       github: 'https://github.com/pbharathcr7/Smart_Recruitment',
-      live: 'https://pbharathcr7.github.io/Smart_Recruitment',
-    },
-    {
-      number: '04',
-      title: 'E-Commerce Platform',
-      description: 'Complete online retail solution with product catalog, shopping cart and order management. Angular frontend with Node.js/Express backend and MongoDB for flexible data storage.',
-      tech: ['Angular', 'Node.js', 'Express', 'MongoDB'],
-      github: 'https://github.com/pbharathcr7/online-retail-frontend',
-      live: 'https://pbharathcr7.github.io/online-retail-frontend/',
     },
   ];
 
@@ -539,7 +525,6 @@ export default function Portfolio() {
           </AnimatePresence>
         </nav>
 
-        {/* â”€â”€ SIDE NAV DOTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-5">
           {NAV_DOTS.map((section) => (
             <button
@@ -568,7 +553,6 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section
           data-section="hero"
           className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -621,72 +605,153 @@ export default function Portfolio() {
             style={{ background: 'radial-gradient(ellipse at center, rgba(5,8,17,0) 0%, rgba(5,8,17,0.65) 65%, #050811 100%)' }}
           />
 
+          {/* Cyan spotlight glow behind the subject */}
+          <div
+            className="absolute z-[2] rounded-full pointer-events-none"
+            style={{
+              width: '55vw',
+              height: '55vw',
+              maxWidth: '780px',
+              maxHeight: '780px',
+              bottom: '-8%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: `radial-gradient(circle, ${CYAN}22 0%, ${CYAN}0a 45%, transparent 70%)`,
+            }}
+          />
+
           {/* Hero content */}
-          <div className="relative z-10 text-center px-6">
+          <div
+            className="relative z-10 w-full h-full flex items-center justify-center"
+          >
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="font-black leading-[0.88] tracking-tighter mb-6"
-              style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(4.5rem, 15vw, 15rem)' }}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-x-0 flex items-center justify-between px-4 sm:px-8 md:px-14 font-black leading-none tracking-tighter select-none whitespace-nowrap pointer-events-none"
+              style={{
+                fontFamily: 'Orbitron, sans-serif',
+                fontSize: 'clamp(3rem, 10vw, 12rem)',
+                bottom: '60%',
+                transform: 'translateY(-50%)',
+                WebkitTextStroke: `1px ${CYAN}14`,
+              }}
             >
-              <span
-                style={{
-                  display: 'block',
-                  background: `linear-gradient(135deg, #ffffff 0%, ${CYAN} 50%, ${GOLD} 100%)`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                BHARATH
-              </span>
-              <span
-                style={{
-                  display: 'block',
-                  background: `linear-gradient(135deg, ${GOLD} 0%, ${CYAN} 100%)`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                P
-              </span>
+              <span>BHARATH</span>
+              <span>P</span>  
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
+            <motion.img
+              src={heroPhoto}
+              alt="Bharath P"
+              initial={{ opacity: 0, y: 60 }}
               animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.55 }}
-              className="text-lg md:text-2xl font-light mb-10"
-              style={{ color: 'rgba(255,255,255,0.55)', letterSpacing: '0.06em' }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-20 h-[64vh] sm:h-[78vh] md:h-[92vh] w-auto max-w-[92vw] object-contain object-bottom select-none pointer-events-none"
+              style={{
+                marginLeft: '50vw',
+                top:"4%",
+                filter: `drop-shadow(0 30px 70px rgba(0,0,0,0.65)) drop-shadow(0 0 45px ${CYAN}22)`,
+              }}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 20, rotate: -6 }}
+              animate={isLoaded ? { opacity: 1, y: 0, rotate: -3 } : {}}
+              transition={{ duration: 0.9, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute z-30 top-[50%] left-[6%] sm:left-[10%] pointer-events-none"
             >
-              Full Stack Developer &nbsp;·&nbsp; AI / GenAI &nbsp;·&nbsp; IEEE Author
-            </motion.p>
+              <span
+                className="block"
+                style={{
+                  fontFamily: "'Caveat', cursive",
+                  fontSize: 'clamp(2.2rem, 6vw, 5rem)',
+                  fontWeight: 700,
+                  color: CYAN,
+                  textShadow: `0 0 30px ${CYAN}55`,
+                }}
+              >
+                Code meets
+              </span>
+            </motion.div>
 
+            <motion.div
+              initial={{ opacity: 0, y: 20, rotate: -6 }}
+              animate={isLoaded ? { opacity: 1, y: 0, rotate: -2 } : {}}
+              transition={{ duration: 0.9, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute z-30 top-[60%] left-[25%] sm:right-[8%] pointer-events-none"
+            >
+              <span
+                className="block"
+                style={{
+                  fontFamily: "'Caveat', cursive",
+                  fontSize: 'clamp(2.2rem, 6vw, 5rem)',
+                  fontWeight: 700,
+                  color: GOLD,
+                  textShadow: `0 0 30px ${GOLD}55`,
+                }}
+              >
+               creativity
+              </span>
+            </motion.div>
+
+            {/* Bottom-left — social row, under the muted text */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="absolute z-30 bottom-[7%] left-6 md:left-14 flex gap-3"
+            >
+              {[
+                { icon: <Github className="w-4 h-4" />, href: 'https://github.com/pbharathcr7' },
+                { icon: <Linkedin className="w-4 h-4" />, href: 'https://www.linkedin.com/in/bharath-p-dev/' },
+                { icon: <Mail className="w-4 h-4" />, href: 'mailto:pbharathcr7@gmail.com' },
+              ].map((s, i) => (
+                <a
+                  key={i}
+                  href={s.href}
+                  target={s.href.startsWith('mailto') ? undefined : '_blank'}
+                  rel={s.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                  onMouseEnter={() => setCursorVariant('hover')}
+                  onMouseLeave={() => setCursorVariant('default')}
+                  className="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  style={{ borderColor: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.02)' }}
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </motion.div>
+
+            {/* Bottom-right — floating glass CTA panel, separate from the nav CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.75 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              transition={{ duration: 0.8, delay: 0.95 }}
+              className="absolute z-30 bottom-[9%] right-6 md:right-14 w-[240px] sm:w-[260px] rounded-2xl border p-5 backdrop-blur-xl"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                borderColor: 'rgba(255,255,255,0.1)',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+              }}
             >
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: CYAN }}>
+                Currently Available
+              </p>
+              <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                Open to AI Engineer opportunities and collaborations.
+              </p>
               <button
                 onClick={() => scrollTo('projects')}
                 onMouseEnter={() => setCursorVariant('hover')}
                 onMouseLeave={() => setCursorVariant('default')}
-                className="px-10 py-4 rounded-full font-bold text-base transition-all duration-300 hover:scale-105"
-                style={{ background: `linear-gradient(135deg, ${CYAN}, ${GOLD})`, color: '#000' }}
+                className="flex items-center justify-between w-full group"
               >
-                View My Work
-              </button>
-              <button
-                onClick={() => scrollTo('contact')}
-                onMouseEnter={() => setCursorVariant('hover')}
-                onMouseLeave={() => setCursorVariant('default')}
-                className="px-10 py-4 rounded-full font-bold text-base border transition-all duration-300 hover:scale-105"
-                style={{ borderColor: `${CYAN}50`, color: CYAN, background: `${CYAN}08` }}
-              >
-                Get in Touch
+                <span className="text-sm font-bold" style={{ color: 'white' }}>View my work</span>
+                <span
+                  className="w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1"
+                  style={{ background: `linear-gradient(135deg, ${CYAN}, ${GOLD})`, color: '#000' }}
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </span>
               </button>
             </motion.div>
           </div>
@@ -762,7 +827,7 @@ export default function Portfolio() {
                 {[
                   { value: '1', label: 'IEEE Publication', color: GOLD, section: 'publications' },
                   { value: '2', label: 'Recognitions', color: '#A78BFA', section: 'awards' },
-                  { value: '3', label: 'Live Projects', color: CYAN, section: 'projects' },
+                  { value: '3', label: 'Projects', color: CYAN, section: 'projects' },
                 ].map((stat, i) => (
                   <motion.button
                     key={stat.label}
@@ -839,7 +904,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* â”€â”€ PROJECTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section data-section="projects" id="projects" className="relative py-32 px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -868,7 +932,7 @@ export default function Portfolio() {
                 backgroundClip: 'text',
               }}
             >
-              My Work
+              Personal work
             </motion.h2>
 
             <div className="grid grid-cols-1 gap-6">
@@ -879,7 +943,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* â”€â”€ AWARDS & RECOGNITION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section data-section="awards" className="relative py-32 px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -920,9 +983,8 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* â”€â”€ PUBLICATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section data-section="publications" className="relative py-32 px-6">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -956,9 +1018,8 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* â”€â”€ CONTACT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section data-section="contact" id="contact" className="relative py-32 px-6 min-h-screen flex items-center">
-          <div className="max-w-6xl mx-auto w-full">
+          <div className="max-w-7xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -976,7 +1037,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="font-black leading-[0.9] mb-10"
-              style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(3rem, 10vw, 10rem)' }}
+              style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 'clamp(1rem, 8vw, 8rem)' }}
             >
               <span
                 className="block"
@@ -1045,14 +1106,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer
-          className="border-t border-white/5 py-8 px-6 text-center text-xs"
-          style={{ color: 'rgba(255,255,255,0.18)' }}
-        >
-          <span style={{ fontFamily: 'Orbitron, sans-serif', color: CYAN }}>BP</span>
-          {' '}· Designed & built by Bharath P · {new Date().getFullYear()}
-        </footer>
       </div>
     </div>
   );
