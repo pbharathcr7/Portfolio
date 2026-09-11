@@ -71,17 +71,19 @@ export default function IntroAnimation({ onComplete }) {
       }
     };
 
-    // If video has already buffered enough data (HAVE_FUTURE_DATA or HAVE_ENOUGH_DATA)
+    // If video has already buffered enough data (HAVE_ENOUGH_DATA or HAVE_FUTURE_DATA)
     if (video.readyState >= 3) {
       startPlayback();
     } else {
+      video.addEventListener('canplaythrough', startPlayback, { once: true });
       video.addEventListener('canplay', startPlayback, { once: true });
     }
 
-    // Safety fallback: if canplay doesn't fire within 400ms, start playback anyway
-    const fallbackTimer = setTimeout(startPlayback, 400);
+    // Safety fallback: if events don't dispatch within 2.5s, start playback anyway
+    const fallbackTimer = setTimeout(startPlayback, 2500);
 
     return () => {
+      video.removeEventListener('canplaythrough', startPlayback);
       video.removeEventListener('canplay', startPlayback);
       clearTimeout(fallbackTimer);
     };
@@ -167,6 +169,16 @@ export default function IntroAnimation({ onComplete }) {
                 : 'opacity-100'
             }`}
           />
+
+          {/* Cyber Buffering Indicator */}
+          {!isPlaying && !isExiting && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-3 pointer-events-none">
+              <div className="w-10 h-10 rounded-full border-2 border-cyan-400/20 border-t-cyan-400 animate-spin" />
+              <span className="font-mono text-[11px] tracking-widest text-cyan-400/80 uppercase">
+                Loading Experience...
+              </span>
+            </div>
+          )}
 
           {/* Terminal Scanline overlay (subtle CRT feel) */}
           <div className="absolute inset-0 pointer-events-none terminal-scanlines opacity-40 mix-blend-overlay" />

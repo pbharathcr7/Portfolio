@@ -79,12 +79,14 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     if (video.readyState >= 3) {
       startPlayback();
     } else {
+      video.addEventListener('canplaythrough', startPlayback, { once: true });
       video.addEventListener('canplay', startPlayback, { once: true });
     }
 
-    const fallbackTimer = setTimeout(startPlayback, 400);
+    const fallbackTimer = setTimeout(startPlayback, 2500);
 
     return () => {
+      video.removeEventListener('canplaythrough', startPlayback);
       video.removeEventListener('canplay', startPlayback);
       clearTimeout(fallbackTimer);
     };
@@ -170,6 +172,16 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                 : 'opacity-100'
             }`}
           />
+
+          {/* Cyber Buffering Indicator */}
+          {!isPlaying && !isExiting && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-3 pointer-events-none">
+              <div className="w-10 h-10 rounded-full border-2 border-cyan-400/20 border-t-cyan-400 animate-spin" />
+              <span className="font-mono text-[11px] tracking-widest text-cyan-400/80 uppercase">
+                Loading Experience...
+              </span>
+            </div>
+          )}
 
           {/* Terminal Scanline overlay (subtle CRT feel) */}
           <div className="absolute inset-0 pointer-events-none terminal-scanlines opacity-40 mix-blend-overlay" />
