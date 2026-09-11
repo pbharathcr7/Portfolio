@@ -334,9 +334,13 @@ export default function Portfolio() {
   const cursorRef = useRef(null);
 
   useEffect(() => {
-    const t = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(t);
-  }, []);
+    if (!showIntro) {
+      const t = setTimeout(() => setIsLoaded(true), 80);
+      return () => clearTimeout(t);
+    } else {
+      setIsLoaded(false);
+    }
+  }, [showIntro]);
 
   useEffect(() => {
     const move = (e) => {
@@ -349,6 +353,7 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
+    if (showIntro) return;
     const sections = document.querySelectorAll('[data-section]');
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.dataset.section); }),
@@ -356,7 +361,7 @@ export default function Portfolio() {
     );
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [showIntro]);
 
   const scrollTo = (section) => {
     document.querySelector(`[data-section="${section}"]`)?.scrollIntoView({ behavior: 'smooth' });
@@ -605,6 +610,7 @@ export default function Portfolio() {
         </div>
 
         <section
+          key={showIntro ? 'hero-dormant' : 'hero-active'}
           data-section="hero"
           className="relative h-screen flex items-center justify-center overflow-hidden"
         >
@@ -677,7 +683,7 @@ export default function Portfolio() {
           >
             <motion.h1
               initial={{ opacity: 0, scale: 0.96 }}
-              animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
+              animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
               transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-x-0 flex items-center justify-between px-4 sm:px-8 md:px-14 font-black leading-none tracking-tighter select-none whitespace-nowrap pointer-events-none"
               style={{
@@ -696,7 +702,7 @@ export default function Portfolio() {
               src={heroPhoto}
               alt="Bharath P"
               initial={{ opacity: 0, y: 60 }}
-              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="relative z-20 h-[64vh] sm:h-[78vh] md:h-[92vh] w-auto max-w-[92vw] object-contain object-bottom select-none pointer-events-none"
               style={{
@@ -707,7 +713,7 @@ export default function Portfolio() {
             />
             <motion.div
               initial={{ opacity: 0, y: 20, rotate: -6 }}
-              animate={isLoaded ? { opacity: 1, y: 0, rotate: -3 } : {}}
+              animate={isLoaded ? { opacity: 1, y: 0, rotate: -3 } : { opacity: 0, y: 20, rotate: -6 }}
               transition={{ duration: 0.9, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="absolute z-30 top-[50%] left-[6%] sm:left-[10%] pointer-events-none"
             >
@@ -727,7 +733,7 @@ export default function Portfolio() {
 
             <motion.div
               initial={{ opacity: 0, y: 20, rotate: -6 }}
-              animate={isLoaded ? { opacity: 1, y: 0, rotate: -2 } : {}}
+              animate={isLoaded ? { opacity: 1, y: 0, rotate: -2 } : { opacity: 0, y: 20, rotate: -6 }}
               transition={{ duration: 0.9, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
               className="absolute z-30 top-[60%] left-[25%] sm:right-[8%] pointer-events-none"
             >
@@ -748,7 +754,7 @@ export default function Portfolio() {
             {/* Bottom-left — social row, under the muted text */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
-              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.8, delay: 1 }}
               className="absolute z-30 bottom-[7%] left-6 md:left-14 flex gap-3"
             >
@@ -776,7 +782,7 @@ export default function Portfolio() {
             {/* Bottom-right — floating glass CTA panel, separate from the nav CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.95 }}
               className="absolute z-30 bottom-[9%] right-6 md:right-14 w-[240px] sm:w-[260px] rounded-2xl border p-5 backdrop-blur-xl"
               style={{
@@ -815,7 +821,7 @@ export default function Portfolio() {
           {/* Scroll indicator */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isLoaded ? { opacity: 1 } : {}}
+            animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 1.3 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
             onClick={() => scrollTo('about')}
