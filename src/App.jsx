@@ -364,8 +364,25 @@ export default function Portfolio() {
   }, [showIntro]);
 
   const scrollTo = (section) => {
-    document.querySelector(`[data-section="${section}"]`)?.scrollIntoView({ behavior: 'smooth' });
     setMobileMenuOpen(false);
+    setTimeout(() => {
+      if (section === 'hero') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const target = document.querySelector(`[data-section="${section}"]`) || document.getElementById(section);
+      if (target) {
+        const navHeight = 70;
+        const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = Math.max(0, elementPosition + currentScroll - navHeight);
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    }, 120);
   };
 
   const projects = [
@@ -549,8 +566,9 @@ export default function Portfolio() {
                   {NAV_LINKS.map((link) => (
                     <button
                       key={link}
+                      type="button"
                       onClick={() => scrollTo(link)}
-                      className="py-3 px-4 text-left text-sm font-medium capitalize rounded-xl transition-colors duration-200"
+                      className="py-3 px-4 text-left text-sm font-medium capitalize rounded-xl transition-all duration-200 cursor-pointer active:scale-95"
                       style={{
                         color: activeSection === link ? CYAN : 'rgba(255,255,255,0.6)',
                         background: activeSection === link ? 'rgba(0,212,255,0.08)' : 'transparent',
@@ -612,6 +630,7 @@ export default function Portfolio() {
         <section
           key={showIntro ? 'hero-dormant' : 'hero-active'}
           data-section="hero"
+          id="hero"
           className="relative min-h-[100dvh] h-[100dvh] md:h-screen flex items-center justify-center overflow-hidden"
         >
           {/* Animated CSS background — glowing orbs + grid */}
@@ -668,7 +687,7 @@ export default function Portfolio() {
             style={{
               width: 'clamp(320px, 55vw, 780px)',
               height: 'clamp(320px, 55vw, 780px)',
-              bottom: '-8%',
+              bottom: '-4%',
               left: '50%',
               transform: 'translateX(-50%)',
               background: `radial-gradient(circle, ${CYAN}22 0%, ${CYAN}0a 45%, transparent 70%)`,
@@ -856,7 +875,7 @@ export default function Portfolio() {
           </motion.div>
         </section>
 
-        <section data-section="about" className="relative py-16 md:py-32 px-4 sm:px-6">
+        <section data-section="about" id="about" className="relative py-16 md:py-32 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -999,7 +1018,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section data-section="awards" className="relative py-32 px-6">
+        <section data-section="awards" id="awards" className="relative py-32 px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -1039,7 +1058,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section data-section="publications" className="relative px-6">
+        <section data-section="publications" id="publications" className="relative px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}

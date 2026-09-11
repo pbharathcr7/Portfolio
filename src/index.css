@@ -162,9 +162,9 @@ body {
   }
 }
 
-/* Portrait Orientation (Phones and Portrait Tablets like iPad Pro):
-   Eliminate top void, center the title & subject, and balance spacing */
-@media (orientation: portrait) {
+/* Mobile Phone Portrait (< 768px):
+   Lift photo up so it's not buried at the bottom, align accents */
+@media (max-width: 767px) {
   .hero-title-portrait {
     top: 15% !important;
     bottom: auto !important;
@@ -175,8 +175,8 @@ body {
     margin-left: auto !important;
     margin-right: auto !important;
     top: auto !important;
-    bottom: 0 !important;
-    height: 58vh !important;
+    bottom: 75px !important;
+    height: 60vh !important;
     max-height: 850px !important;
   }
   .hero-accent-code-portrait {
@@ -184,7 +184,7 @@ body {
     left: 8% !important;
   }
   .hero-accent-creativity-portrait {
-    top: 28% !important;
+    top: 22% !important;
     right: 8% !important;
     left: auto !important;
   }
@@ -195,6 +195,54 @@ body {
     margin-right: auto !important;
     transform: none;
     bottom: 54px !important;
+  }
+  .hero-socials-desktop {
+    display: none !important;
+  }
+  .hero-socials-mobile {
+    display: flex !important;
+  }
+}
+
+/* Tablet Portrait (768px to 1024px in portrait):
+   Keep photo grounded at the bottom with natural height so it does not shift up */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .hero-title-portrait {
+    top: 18% !important;
+    bottom: auto !important;
+    transform: none !important;
+    justify-content: center !important;
+  }
+  .hero-photo-portrait {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    top: auto !important;
+    bottom: 0 !important;
+    height: 68vh !important;
+    max-height: 900px !important;
+  }
+  .hero-accent-code-portrait {
+    top: 26% !important;
+    left: 8% !important;
+  }
+  .hero-accent-creativity-portrait {
+    top: 26% !important;
+    right: 8% !important;
+    left: auto !important;
+  }
+  .hero-cta-portrait {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: min(520px, 86vw) !important;
+    max-width: 520px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    bottom: 35px !important;
+    padding: 13px 22px !important;
+  }
+  .hero-cta-portrait .uppercase {
+    white-space: nowrap !important;
   }
   .hero-socials-desktop {
     display: none !important;
