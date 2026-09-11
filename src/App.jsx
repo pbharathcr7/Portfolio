@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Mail, Linkedin, ArrowUpRight, Menu, X, BookOpen, Award, Trophy, ChevronDown } from 'lucide-react';
+import { Github, ExternalLink, Mail, Linkedin, ArrowUpRight, Menu, X, BookOpen, Award, Trophy, ChevronDown, FileDown } from 'lucide-react';
 import IntroAnimation from './components/IntroAnimation';
-// Drop your cutout photo into src/assets/ and update this path/filename to match.
-import heroPhoto from './../public/assets/bharath-hero.png';
+import TechStackMarquee from './components/TechStackMarquee';
+const heroPhoto = `${import.meta.env.BASE_URL}assets/bharath-hero.png`;
 
 // 3D HERO SCENE
 
@@ -23,6 +23,16 @@ const TECH_COLORS = {
   SQLite: '#60a5fa',
   yfinance: '#00D4FF',
   SerpAPI: '#FFB800',
+  Firebase: '#FFCA28',
+  Firestore: '#FF9100',
+  'Google Cloud Run': '#4285F4',
+  'Gemini Live API': '#00D4FF',
+  WebSockets: '#A855F7',
+  RAG: '#10B981',
+  'Google Calendar API': '#34A853',
+  'Gmail API': '#EA4335',
+  FastAPI: '#009688',
+  Pinecone: '#06B6D4',
 };
 
 // PROJECT CARD (3D tilt)
@@ -483,6 +493,26 @@ export default function Portfolio() {
                   )}
                 </button>
               ))}
+
+              {/* Resume download button */}
+              <a
+                href={`${import.meta.env.BASE_URL}Documents/Bharath_Resume.pdf`}
+                download="Bharath_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setCursorVariant('hover')}
+                onMouseLeave={() => setCursorVariant('default')}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105"
+                style={{
+                  borderColor: `${CYAN}50`,
+                  color: CYAN,
+                  background: `${CYAN}10`,
+                  boxShadow: `0 0 15px -3px ${CYAN}30`,
+                }}
+              >
+                <FileDown className="w-3.5 h-3.5" />
+                <span>Resume</span>
+              </a>
             </div>
 
             {/* Mobile hamburger */}
@@ -519,6 +549,22 @@ export default function Portfolio() {
                       {link}
                     </button>
                   ))}
+
+                  <a
+                    href={`${import.meta.env.BASE_URL}Documents/Bharath_Resume.pdf`}
+                    download="Bharath_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 py-3 px-4 text-center text-sm font-semibold rounded-xl flex items-center justify-center gap-2 border"
+                    style={{
+                      borderColor: `${CYAN}50`,
+                      color: CYAN,
+                      background: `${CYAN}15`,
+                    }}
+                  >
+                    <FileDown className="w-4 h-4" />
+                    <span>Download Resume</span>
+                  </a>
                 </div>
               </motion.div>
             )}
@@ -638,7 +684,7 @@ export default function Portfolio() {
               }}
             >
               <span>BHARATH</span>
-              <span>P</span>  
+              <span>P</span>
             </motion.h1>
 
             <motion.img
@@ -650,7 +696,7 @@ export default function Portfolio() {
               className="relative z-20 h-[64vh] sm:h-[78vh] md:h-[92vh] w-auto max-w-[92vw] object-contain object-bottom select-none pointer-events-none"
               style={{
                 marginLeft: '50vw',
-                top:"4%",
+                top: "4%",
                 filter: `drop-shadow(0 30px 70px rgba(0,0,0,0.65)) drop-shadow(0 0 45px ${CYAN}22)`,
               }}
             />
@@ -690,7 +736,7 @@ export default function Portfolio() {
                   textShadow: `0 0 30px ${GOLD}55`,
                 }}
               >
-               creativity
+                creativity
               </span>
             </motion.div>
 
@@ -719,6 +765,7 @@ export default function Portfolio() {
                   {s.icon}
                 </a>
               ))}
+
             </motion.div>
 
             {/* Bottom-right — floating glass CTA panel, separate from the nav CTA */}
@@ -739,20 +786,24 @@ export default function Portfolio() {
               <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Open to AI Engineer opportunities and collaborations.
               </p>
-              <button
-                onClick={() => scrollTo('projects')}
-                onMouseEnter={() => setCursorVariant('hover')}
-                onMouseLeave={() => setCursorVariant('default')}
-                className="flex items-center justify-between w-full group"
-              >
-                <span className="text-sm font-bold" style={{ color: 'white' }}>View my work</span>
-                <span
-                  className="w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1"
-                  style={{ background: `linear-gradient(135deg, ${CYAN}, ${GOLD})`, color: '#000' }}
+
+              <div className="flex flex-col gap-2.5">
+                <a
+                  href={`${import.meta.env.BASE_URL}Documents/Bharath_Resume.pdf`}
+                  download="Bharath_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() => setCursorVariant('hover')}
+                  onMouseLeave={() => setCursorVariant('default')}
+                  className="flex items-center justify-between w-full group py-2.5 px-3.5 rounded-xl border border-white/10 hover:border-cyan-400/50 bg-white/[0.03] hover:bg-cyan-400/[0.08] transition-all duration-300"
                 >
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
-              </button>
+                  <div className="flex items-center gap-2">
+                    <FileDown className="w-3.5 h-3.5 text-cyan-400 transition-transform duration-300 group-hover:translate-y-0.5" />
+                    <span className="text-xs font-semibold text-gray-300 group-hover:text-white">Download Resume</span>
+                  </div>
+                  <span className="text-[10px] text-gray-500 font-mono uppercase tracking-wider">PDF</span>
+                </a>
+              </div>
             </motion.div>
           </div>
 
@@ -764,17 +815,16 @@ export default function Portfolio() {
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
             onClick={() => scrollTo('about')}
           >
-            <span className="text-xs uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.25)' }}>Scroll</span>
+            <span className="text-xs uppercase tracking-widest" style={{ color: 'rgba(255, 255, 255, 1)' }}>Scroll</span>
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             >
-              <ChevronDown className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.25)' }} />
+              <ChevronDown className="w-5 h-5" style={{ color: 'rgba(255, 255, 255, 1)' }} />
             </motion.div>
           </motion.div>
         </section>
 
-        {/* â”€â”€ ABOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section data-section="about" className="relative py-32 px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -785,7 +835,7 @@ export default function Portfolio() {
               className="flex items-center gap-4 mb-16"
             >
               <div className="w-12 h-[2px]" style={{ background: `linear-gradient(90deg, ${CYAN}, transparent)` }} />
-              <span className="text-sm uppercase tracking-[0.3em] font-medium" style={{ color: CYAN }}>About Me</span>
+              <span className="text-sm uppercase tracking-[0.3em] font-medium" style={{ color: CYAN,fontSize: 'xxx-large' }}>About Me</span>
             </motion.div>
 
             {/* Bento grid */}
@@ -812,13 +862,18 @@ export default function Portfolio() {
                   </span>
                   <span className="block text-white"> into Reality</span>
                 </h2>
-                <p className="text-gray-400 text-lg leading-relaxed mb-3">
-                  Junior Software Developer at{' '}
-                  <span className="font-semibold text-white">Peninsular Research Operation</span>
-                  {' '}specializing in full-stack applications and AI-powered solutions.
+                <p className="text-gray-300 text-lg leading-relaxed mb-4">
+                  I'm <span className="font-semibold text-white">Bharath</span>, Software Engineer with <span className="text-white font-medium">1 year of experience</span> building production AI applications and intelligent automation solutions.
                 </p>
-                <p className="text-gray-500 text-base leading-relaxed">
-                  I specialize in Angular, Python, LangChain, LangGraph and MongoDB, developing systems that transform natural language into actionable insights. From conversational analytics and automated visualization pipelines to secure enterprise applications, I enjoy solving complex business problems through practical software engineering.
+                <p className="text-gray-400 text-base leading-relaxed mb-3">
+                  Developed LLM-powered systems using{' '}
+                  <span className="text-cyan-400 font-medium">LangGraph</span>,{' '}
+                  <span className="text-cyan-400 font-medium">LangChain</span>, and{' '}
+                  <span className="text-cyan-400 font-medium">Azure OpenAI</span>{' '}
+                  to automate analytics and conversational data exploration, reducing manual effort and improving decision-making.
+                </p>
+                <p className="text-gray-400 text-base leading-relaxed">
+                  Experience in integrating AI with backend services and scalable data pipelines.
                 </p>
               </motion.div>
 
@@ -837,15 +892,21 @@ export default function Portfolio() {
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     whileHover={{ scale: 1.03, x: -3 }}
                     onClick={() => scrollTo(stat.section)}
-                    onMouseEnter={() => setCursorVariant('hover')}
-                    onMouseLeave={() => setCursorVariant('default')}
                     className="flex-1 rounded-2xl p-6 border flex items-center gap-4 text-left transition-colors duration-300 group"
                     style={{
                       background: 'rgba(255,255,255,0.02)',
                       borderColor: 'rgba(255,255,255,0.1)',
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = stat.color + '50'; e.currentTarget.style.background = stat.color + '08'; setCursorVariant('hover'); }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; setCursorVariant('default'); }}
+                    onMouseEnter={(e) => {
+                      setCursorVariant('hover');
+                      e.currentTarget.style.borderColor = stat.color + '50';
+                      e.currentTarget.style.background = stat.color + '08';
+                    }}
+                    onMouseLeave={(e) => {
+                      setCursorVariant('default');
+                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.02)';
+                    }}
                   >
                     <div
                       className="text-4xl font-black"
@@ -862,49 +923,13 @@ export default function Portfolio() {
                 ))}
               </div>
 
-              {/* Skills card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="lg:col-span-3 rounded-3xl p-8 border border-white/10"
-                style={{ background: 'rgba(255,255,255,0.02)' }}
-              >
-                <h3 className="text-xs uppercase tracking-[0.3em] text-gray-600 font-medium mb-6">Tech Stack</h3>
-                <div className="flex flex-col gap-5">
-                  {[
-                    { category: 'Frontend', skills: ['Angular', 'React', 'Flutter', 'JavaScript', 'TypeScript', 'Tailwind CSS'], color: '#61DAFB' },
-                    { category: 'Backend', skills: ['Node.js', 'Python', 'Django', 'FastAPI', 'REST APIs', 'LangChain', 'LangGraph', 'GenAI'], color: '#22c55e' },
-                    { category: 'Database & Cloud', skills: ['MongoDB', 'MySQL', 'Redis', 'Azure Functions', 'Blob Storage'], color: GOLD },
-                  ].map(({ category, skills, color }) => (
-                    <div key={category}>
-                      <div className="flex items-center gap-2.5 mb-2.5">
-                        <div className="w-1.5 h-1.5 rounded-full" style={{ background: color }} />
-                        <span className="text-xs text-gray-600 uppercase tracking-widest">{category}</span>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {skills.map((skill) => (
-                          <span
-                            key={skill}
-                            onMouseEnter={(e) => { e.currentTarget.style.borderColor = color + '60'; e.currentTarget.style.color = color; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.65)'; e.currentTarget.style.transform = ''; }}
-                            className="px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 cursor-default"
-                            style={{ borderColor: 'rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.65)' }}
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+              {/* Infinite Logo Marquee Tech Stack */}
+              <TechStackMarquee setCursorVariant={setCursorVariant} />
             </div>
           </div>
         </section>
 
-        <section data-section="projects" id="projects" className="relative py-32 px-6">
+        <section data-section="projects" id="projects" className="relative px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -983,7 +1008,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section data-section="publications" className="relative py-32 px-6">
+        <section data-section="publications" className="relative px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
